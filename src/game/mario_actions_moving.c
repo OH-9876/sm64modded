@@ -448,16 +448,12 @@ void update_walking_speed(struct MarioState *m) {
     }
 
     if (m->forwardVel <= 0.0f) {
-        m->forwardVel += 1.1f;
-    } else if (m->forwardVel <= targetSpeed) {
-        m->forwardVel += 1.1f - m->forwardVel / 43.0f;
-    } else if (m->floor->normal.y >= 0.95f) {
-        m->forwardVel -= 1.0f;
-    }
-
-    if (m->forwardVel > 48.0f) {
-        m->forwardVel = 48.0f;
-    }
+    m->forwardVel += 1.1f;
+} else if (m->floor->normal.y >= 0.95f) {
+    m->forwardVel -= 1.0f;
+} else {
+    m->forwardVel += 1.1f;
+}
 
     m->faceAngle[1] =
         m->intendedYaw - approach_s32((s16)(m->intendedYaw - m->faceAngle[1]), 0, 0x800, 0x800);
